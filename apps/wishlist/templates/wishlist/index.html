@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Index Page</title>
+	<style>
+
+</style>
+</head>
+<body>
+
+	<a href="{% url 'logout' %}">Logout</a>
+
+	<h1>Welcome, {{user.name}}! Make a wish</h1>
+
+
+
+<table style="width:50%">
+  <h3>Your Wish List:</h4>
+  <tr>
+    <th>Item</th>
+    <th>Added By</th>
+    <th>Date Added</th>
+    <th>Action</th>
+  </tr>
+          {% for item in user.wishes.all %}
+          <tr>
+            <td><a href='wish_items/{{item.id}}'> {{ item.description }}</a></td>
+            <td>{{ item.added_by.name }}</td>
+            <td>{{ item.created_at }}</td>
+            <td>
+              <a href='removewish/{{item.id}}'>Remove from my Wishlist</a><br><br>
+              <a href='delete/{{item.id}}'>Delete</a></td>
+          </tr>
+          {% endfor %}
+</table>
+<br>
+<br>
+<table style="width:50%">
+  <h3>Other Users' Wish List:</h3>
+  <tr>
+    <th>Item</th>
+    <th>Added By</th>
+    <th>Date Added</th>
+    <th>Action</th>
+  </tr>
+          {% for item in notwished %}
+            <tr>
+              <td><a href='wish_items/{{item.id}}'> {{ item.description }}</a></td>
+              <td>{{ item.added_by.name }}</td>
+              <td>{{ item.created_at }}</td>
+              <td><a href='addwish/{{item.id}}'>Add to my Wishlist</a></td>
+            </tr>
+          {% endfor %}
+</table>
+<br>
+<br>
+<a href="{% url 'create_wish' %}">Add Item</a>
+
+</body>
+</html>

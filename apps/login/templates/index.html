@@ -1,0 +1,50 @@
+<html>
+    
+    <head>
+        <title>Login and Register</title>
+        {% load staticfiles %}
+    </head>
+    
+    <body>
+        <div class="wrapper">
+    
+            {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+    
+            <h1>Please log in or register</h1>
+            <form class="topform" action="{% url 'register' %}" method="post" style="width:264px;display: inline-block;background-color: gold;padding: 10px;">
+                {% csrf_token %}
+    
+                <h3>Register</h3>
+                Name:<input type="text" name="name">
+                <br><br>
+                Username<input type="text" name="username">
+                <br><br>
+                Password:<input type="password" name="password">
+                <br><br>
+                Confirm Password:<input type="password" name="password_confirmation">
+                <br>
+                <p class="btnpar">
+                    <input type="submit" value="Register">
+                </p>
+            </form>
+    
+            <form class="btform" action="{% url 'login' %}" method="post" style="width:264px;display: inline-block;background-color: gold;padding: 10px;vertical-align: top;margin-left: 100px;">
+                {% csrf_token %}
+                <h3>Login</h3>
+                Username:<input type="text" name="username">
+                <br><br>
+                Password:<input type="password" name="password">
+                <p class="btnpar">
+                    <input type="submit" value="Login">
+                </p>
+            </form>
+        </div>
+    </body>
+    
+    </html>
